@@ -75,4 +75,21 @@ export class AuthService {
       }
     };
   }
+
+  async me(userId: number) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        role: true,
+        isActive: true,
+      },
+    });
+
+    return user;
+   }
 }
